@@ -1,18 +1,18 @@
----
 HOSTS:
-  czriitzephrrlzw:
+  'sles-12-vcloud':
     roles:
-    - master
-    - database
-    - dashboard
-    - agent
-    - default
+      - master
+      - database
+      - dashboard
+      - agent
+      - default
     platform: sles-12-x86_64
-    template: sles-12-x86_64
     hypervisor: vcloud
+    template: sles-12-x86_64
 CONFIG:
-  nfs_server: none
-  consoleport: 443
+  type: foss
+  ssh:
+    keys: "~/.ssh/id_rsa-acceptance"
   datastore: instance0
   folder: Delivery/Quality Assurance/Enterprise/Dynamic
   resourcepool: delivery/Quality Assurance/Enterprise/Dynamic

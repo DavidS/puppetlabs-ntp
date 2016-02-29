@@ -1,8 +1,8 @@
 class ntp (
   $autoupdate        = $ntp::params::autoupdate,
   $broadcastclient   = $ntp::params::broadcastclient,
-  $config            = $ntp::params::config,
-  $config_dir        = $ntp::params::config_dir,
+  # $config            = $ntp::params::config,
+  # $config_dir        = $ntp::params::config_dir,
   $config_file_mode  = $ntp::params::config_file_mode,
   $config_template   = $ntp::params::config_template,
   $disable_auth      = $ntp::params::disable_auth,
@@ -22,7 +22,7 @@ class ntp (
   $minpoll           = $ntp::params::minpoll,
   $maxpoll           = $ntp::params::maxpoll,
   $package_ensure    = $ntp::params::package_ensure,
-  $package_manage    = $ntp::params::package_manage,
+  # $package_manage    = $ntp::params::package_manage,
   $package_name      = $ntp::params::package_name,
   $panic             = $ntp::params::panic,
   $peers             = $ntp::params::peers,
@@ -32,7 +32,7 @@ class ntp (
   $servers           = $ntp::params::servers,
   $service_enable    = $ntp::params::service_enable,
   $service_ensure    = $ntp::params::service_ensure,
-  $service_manage    = $ntp::params::service_manage,
+  # $service_manage    = $ntp::params::service_manage,
   $service_name      = $ntp::params::service_name,
   $stepout           = $ntp::params::stepout,
   $tinker            = $ntp::params::tinker,
@@ -93,6 +93,10 @@ class ntp (
     validate_absolute_path($config_dir)
   }
 
+  if ! ($service_ensure in [ 'running', 'stopped' ]) {
+    fail('service_ensure parameter must be "running" or "stopped"')
+  }
+
   if $autoupdate {
     notice('autoupdate parameter has been deprecated and replaced with package_ensure.  Set this to latest for the same behavior as autoupdate => true.')
   }
@@ -101,9 +105,16 @@ class ntp (
   # mess everything up.  You can read about this at:
   # http://docs.puppetlabs.com/puppet/2.7/reference/lang_containment.html#known-issues
   anchor { 'ntp::begin': } ->
-  class { '::ntp::install': } ->
-  class { '::ntp::config': } ~>
-  class { '::ntp::service': } ->
+  class { '::ntp::skel': } ->
   anchor { 'ntp::end': }
 
+  ntp::config {
+    'default':
+      content => template($config_template),
+      mode    => $config_file_mode,
+  }
+
+  if $disable_dhclient {
+    include ntp::policy::disable_dhclient_integration
+  }
 }
