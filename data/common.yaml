@@ -1,6 +1,8 @@
 ---
+ntp::authprov: ~
 ntp::autoupdate: false
 ntp::broadcastclient: false
+ntp::config_dir: ~
 ntp::config_file_mode: '0644'
 ntp::config_template: 'ntp/ntp.conf.erb'
 ntp::config: '/etc/ntp.conf'
@@ -19,6 +21,11 @@ ntp::keys_file: '/etc/ntp.keys'
 ntp::keys_requestkey: ''
 ntp::keys_trusted: []
 ntp::keys: []
+ntp::leapfile: ~
+ntp::logfile: ~
+ntp::ntpsigndsocket: ~
+ntp::maxpoll: ~
+ntp::minpoll: ~
 ntp::package_ensure: present
 ntp::package_manage: true
 ntp::package_name: [ 'ntp' ]
@@ -33,6 +40,8 @@ ntp::service_enable: true
 ntp::service_ensure: running
 ntp::service_manage: true
 ntp::service_name: ntpd
+ntp::service_provider: ~
+ntp::stepout: ~
 ntp::step_tickers_file: ~
 ntp::step_tickers_template: 'ntp/step-tickers.erb'
 ntp::tos_ceiling: '15'
