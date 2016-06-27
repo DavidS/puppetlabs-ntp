@@ -1,5 +1,5 @@
 class ntp::params {
-  if str2bool($::is_virtual) {
+  if str2bool($facts['is_virtual']) {
     $tinker = true
     $panic  = 0
   }
