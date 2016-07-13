@@ -1,0 +1,7 @@
+# THIS FILE IS MANAGED BY PUPPET
+# <%= file %>
+#
+<% if $ntp::keys != [] {-%>
+<% [$ntp::keys].flatten.each |$key| {-%>
+<%= $key %>
+<% }} -%>
