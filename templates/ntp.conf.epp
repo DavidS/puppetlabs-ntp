@@ -17,7 +17,7 @@ disable kernel <% } %>
 <% if $ntp::restrict != [] {-%>
 # Permit time synchronization with our time source, but do not
 # permit the source to query or modify the service on this system.
-<% [$ntp::restrict].flatten.each |$restrict| {-%>
+<% $ntp::restrict.each |$restrict| {-%>
 restrict <%= $restrict %> <% }} %>
 
 <% if $ntp::interfaces != [] {-%>

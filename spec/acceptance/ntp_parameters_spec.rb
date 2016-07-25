@@ -43,6 +43,8 @@ else
   config = '/etc/ntp.conf'
 end
 
+modulepath = default['distmoduledir']
+
 describe "ntp class:", :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily')) do
   it 'applies successfully' do
     pp = "class { 'ntp': }"
@@ -75,13 +77,12 @@ describe "ntp class:", :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
 
   describe 'config_template' do
     it 'sets up template' do
-      modulepath = default['distmoduledir']
       shell("mkdir -p #{modulepath}/test/templates")
       shell("echo 'testcontent' >> #{modulepath}/test/templates/ntp.conf.epp")
     end
 
     it 'sets the ntp.conf location' do
-      pp = "class { 'ntp': config_template => '/test/templates/ntp.conf.epp' }"
+      pp = "class { 'ntp': config_template => '#{modulepath}/test/templates/ntp.conf.epp' }"
       apply_manifest(pp, :catch_failures => true)
     end
 
