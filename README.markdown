@@ -109,7 +109,7 @@ class { '::ntp':
   servers         => [ 'ntp1.corp.com', 'ntp2.corp.com' ],
   restrict        => ['127.0.0.1'],
   service_manage  => false,
-  config_template => 'different/module/custom.template.erb',
+  config_template => 'different/module/custom.template.epp',
 }
 ```
 
@@ -154,7 +154,7 @@ Specifies a file mode for the ntp configuration file. Valid options: string cont
 
 ####`config_template`
 
-Specifies a file to act as a template for the config file. Valid options: string containing a path (absolute, or relative to the module path). Default value: 'ntp/ntp.conf.erb'
+Specifies a file to act as a template for the config file. Valid options: string containing a path (absolute, or relative to the module path). Default value: 'ntp/ntp.conf.epp'
 
 ####`disable_auth`
 

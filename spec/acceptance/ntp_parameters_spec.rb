@@ -81,14 +81,14 @@ describe "ntp class:", :unless => UNSUPPORTED_PLATFORMS.include?(fact('osfamily'
   end
 
   describe 'config_template' do
-    it 'sets up template' do
+    before :all do
       modulepath = default['distmoduledir']
       shell("mkdir -p #{modulepath}/test/templates")
-      shell("echo 'testcontent' >> #{modulepath}/test/templates/ntp.conf")
+      shell("echo 'testcontent' >> #{modulepath}/test/templates/ntp.conf.epp")
     end
 
     it 'sets the ntp.conf location' do
-      pp = "class { 'ntp': config_template => 'test/ntp.conf' }"
+      pp = "class { 'ntp': config_template => 'test/ntp.conf.epp' }"
       apply_manifest(pp, :catch_failures => true)
     end
 

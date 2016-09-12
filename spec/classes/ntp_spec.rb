@@ -31,7 +31,7 @@ describe 'ntp' do
         end
 
         describe 'allows template to be overridden' do
-          let(:params) {{ :config_template => 'my_ntp/ntp.conf.erb' }}
+          let(:params) {{ :config_template => 'my_ntp/ntp.conf.epp' }}
           it { should contain_file('/etc/ntp.conf').with({
             'content' => /server foobar/})
           }

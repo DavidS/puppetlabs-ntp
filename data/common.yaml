@@ -4,7 +4,7 @@ ntp::autoupdate: false
 ntp::broadcastclient: false
 ntp::config_dir: ~
 ntp::config_file_mode: '0644'
-ntp::config_template: 'ntp/ntp.conf.erb'
+ntp::config_template: 'ntp/ntp.conf.epp'
 ntp::config: '/etc/ntp.conf'
 ntp::disable_auth: false
 ntp::disable_dhclient: false
@@ -44,7 +44,7 @@ ntp::service_name: ntpd
 ntp::service_provider: ~
 ntp::stepout: ~
 ntp::step_tickers_file: ~
-ntp::step_tickers_template: 'ntp/step-tickers.erb'
+ntp::step_tickers_template: 'ntp/step-tickers.epp'
 ntp::tinker: ~
 ntp::tos_ceiling: '15'
 ntp::tos_cohort: '0'

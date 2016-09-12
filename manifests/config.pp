@@ -27,7 +27,7 @@ class ntp::config inherits ntp {
       owner   => 0,
       group   => 0,
       mode    => '0644',
-      content => template('ntp/keys.erb'),
+      content => epp('ntp/keys.epp'),
     }
   }
 
@@ -36,7 +36,7 @@ class ntp::config inherits ntp {
     owner   => 0,
     group   => 0,
     mode    => $::ntp::config_file_mode,
-    content => template($ntp::config_template),
+    content => epp($ntp::config_template),
   }
 
   if $::ntp::step_tickers_file {
@@ -45,7 +45,7 @@ class ntp::config inherits ntp {
       owner   => 0,
       group   => 0,
       mode    => $::ntp::config_file_mode,
-      content => template($ntp::step_tickers_template),
+      content => epp($ntp::step_tickers_template),
     }
   }
 
