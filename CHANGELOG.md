@@ -1,7 +1,21 @@
+## Supported Releases 5.0.0 and 6.0.0
+### Summary
+
+This double release starts using all the nice puppet4 features (data in modules, epp templates, $facts hash, and data types). The 5.0.0 release is fully backwards compatible to existing puppet4 configurations, and will provide you with [deprecation warnings](https://github.com/puppetlabs/puppetlabs-stdlib#deprecation) for every argument that will not work as expected with the final 6.0.0 release. Please see the [stdlib docs](https://github.com/puppetlabs/puppetlabs-stdlib#validate_legacy) for an in-depth discussion of this process.
+
+If you're still running puppet 3, please remain on the latest puppetlabs-ntp 4.x release for now, and see the documentation to [upgrade to puppet4](https://docs.puppet.com/puppet/4.6/reference/upgrade_major_pre.html).
+
+### Changes
+
+* [Data in modules](https://docs.puppet.com/puppet/latest/reference/lookup_quick_module.html#example-with-hiera): moves all distribution, and os-dependant defaults into YAML files in `data/`, alleviating the need for a `params` class.
+* [EPP templating](https://docs.puppet.com/puppet/latest/reference/lang_template_epp.html): Using the puppet language as a base for templates makes for simpler, and safer templates. No need for ruby anymore! You can pass in EPP templates for the `ntp.conf` and `step-tickers` file using the new `config_epp` and `step_tickers_epp` parameters.
+* Using [the $facts hash](https://docs.puppet.com/puppet/latest/reference/lang_facts_and_builtin_vars.html#the-factsfactname-hash): More readable and maintainable code, by making facts visibly distinct from other variables. Eliminates possible confusion if you use a local variable whose name happens to match that of a common fact.
+* Use [Data Types for validation](https://docs.puppet.com/puppet/4.6/reference/lang_data.html): The existing `validate_*` function based validation was replaced by stricter, and more readable, data type based notation. Upgrade first to the 5.0.0 release of this module, and address all the deprecation warnings before upgrading to the final 6.0.0 release. Please see the [stdlib docs](https://github.com/puppetlabs/puppetlabs-stdlib#validate_legacy) for an in-depth discussion of this process.
+
 ## Supported Release 4.2.0
 ### Summary
 
-A large release with many new features. Multiple additions to parameters and work contributed to OS compatibility. Also includes several bug fixes, including clean ups of code. 
+A large release with many new features. Multiple additions to parameters and work contributed to OS compatibility. Also includes several bug fixes, including clean ups of code.
 
 #### Features
 - Updated spec helper for more consistency
@@ -292,7 +306,7 @@ Configuration directives that might possibly be affected:
 - ArchLinux handled via osfamily instead of special casing.
 - parameters in `ntp` class:
   - `autoupdate`: deprecated in favor of directly setting package_ensure.
-  - `panic`: set to false if you wish to allow large clock skews. 
+  - `panic`: set to false if you wish to allow large clock skews.
 
 ---
 ##2011-11-10 Dan Bode <dan@puppetlabs.com> - 0.0.4
