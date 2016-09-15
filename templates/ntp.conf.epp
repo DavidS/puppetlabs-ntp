@@ -2,7 +2,7 @@
 #
 # Enable next tinker options:
 # panic - keep ntpd from panicking in the event of a large clock skew
-# when a VM guest is suspended and resumed.
+# when a VM guest is suspended and resumed;
 # stepout - allow ntpd change offset faster
 <% if $ntp::_tinker and ($ntp::_panic or $ntp::stepout) {-%>
 tinker<% if $ntp::_panic { %> panic <%= $ntp::_panic %><% } %><%if $ntp::stepout { %> stepout <%=$ntp::stepout %><% } %>
