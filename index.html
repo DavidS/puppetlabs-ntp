@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
 
 <script type="text/javascript" charset="utf-8">
-  pathId = "README";
+  pathId = "";
   relpath = '';
 </script>
 
@@ -28,7 +28,7 @@
   </head>
   <body>
     <div class="nav_wrap">
-      <iframe id="nav" src="class_list.html"></iframe>
+      <iframe id="nav" src="puppet_class_list.html"></iframe>
       <div id="resizer"></div>
     </div>
 
@@ -43,8 +43,8 @@
 
         <div id="search">
   
-    <a class="full_list_link" id="puppet_manifest_list_link"
-        href="puppet_manifest_list.html">
+    <a class="full_list_link" id="puppet_class_list_link"
+        href="puppet_class_list.html">
 
         <svg width="24" height="24">
           <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
@@ -57,7 +57,7 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame" src="class_list.html"></iframe>
+      <iframe id="search_frame" src="puppet_class_list.html"></iframe>
 
       <div id="content"><div id='filecontents'>
 <h1 id="label-ntp">ntp</h1>
@@ -171,7 +171,7 @@ nodes which may have numerous virtual interfaces.</p>
   servers         =&gt; [ &#39;ntp1.corp.com&#39;, &#39;ntp2.corp.com&#39; ],
   restrict        =&gt; [&#39;127.0.0.1&#39;],
   service_manage  =&gt; false,
-  config_template =&gt; &#39;different/module/custom.template.epp&#39;,
+  config_epp      =&gt; &#39;different/module/custom.template.epp&#39;,
 }</code></pre>
 
 <h2 id="label-Reference">Reference</h2>
@@ -196,13 +196,6 @@ nodes which may have numerous virtual interfaces.</p>
 
 <p>The following parameters are available in the <code>::ntp</code> class:</p>
 
-<h4 id="label-autoupdate"><code>autoupdate</code></h4>
-
-<p><strong>Deprecated; replaced by the <code>package_ensure</code>
-parameter</strong>. Tells Puppet whether to keep the ntp module updated to
-the latest version available. Valid options: true or false. Default value:
-false</p>
-
 <h4 id="label-broadcastclient"><code>broadcastclient</code></h4>
 
 <p>Enable reception of broadcast server messages to any local interface.</p>
@@ -225,9 +218,19 @@ containing file mode. Default value: &#39;0664&#39;</p>
 
 <h4 id="label-config_template"><code>config_template</code></h4>
 
-<p>Specifies a file to act as a template for the config file. Valid options:
-string containing a path (absolute, or relative to the module path).
-Default value: &#39;ntp/ntp.conf.epp&#39;</p>
+<p>Specifies a file to act as a ERB template for the config file. Valid
+options: string containing a path (absolute, or relative to the module
+path). Example value: &#39;ntp/ntp.conf.erb&#39;. Validation error will be
+thrown if this param is supplied as well as the <code>config_epp</code>
+param.</p>
+
+<h4 id="label-config_epp"><code>config_epp</code></h4>
+
+<p>Specifies a file to act as a EPP template for the config file. Valid
+options: string containing a path (absolute, or relative to the module
+path). Example value: &#39;ntp/ntp.conf.epp&#39;. Validation error will be
+thrown if this param is supplied as well as the
+<code>config_template</code> param.</p>
 
 <h4 id="label-disable_auth"><code>disable_auth</code></h4>
 
@@ -353,8 +356,9 @@ false. Default value: true</p>
 
 <h4 id="label-package_name"><code>package_name</code></h4>
 
-<p>Tells Puppet what NTP package to manage. Valid options: string. Default
-value: &#39;ntp&#39; (except on AIX and Solaris)</p>
+<p>Tells Puppet what NTP package to manage. Valid options: <a
+href="string">Array</a>. Default value: [&#39;ntp&#39;] (except on AIX and
+Solaris)</p>
 
 <h4 id="label-panic"><code>panic</code></h4>
 
@@ -428,8 +432,15 @@ varies by operating system</p>
 
 <h4 id="label-step_tickers_template"><code>step_tickers_template</code></h4>
 
-<p>Location of the step tickers template file. Default value: varies by
-operating system</p>
+<p>Location of the step tickers ERB template file. Default value: varies by
+operating system. Validation error will be thrown if this is specified as
+well as the <code>step_tickers_epp</code> param.</p>
+
+<h4 id="label-step_tickers_epp"><code>step_tickers_epp</code></h4>
+
+<p>Location of the step tickers EPP template file. Default value: varies by
+operating system. Validation error will be thrown if this is specified as
+well as the <code>step_tickers_template</code> param.</p>
 
 <h4 id="label-stepout"><code>stepout</code></h4>
 
@@ -511,7 +522,7 @@ of contributors.</a></p>
 </div></div>
 
       <div id="footer">
-  Generated on Mon Aug 22 10:37:08 2016 by
+  Generated on Sun Oct  9 20:48:19 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>
