@@ -89,6 +89,8 @@
 <div class="docstring">
   <div class="discussion">
     
+<p>This is the main class, which exposes all public functionality.</p>
+
   </div>
 </div>
 <div class="tags">
@@ -103,6 +105,11 @@
         <span class='type'>(<tt>Boolean</tt>)</span>
       
       
+      
+        &mdash;
+        <div class='inline'>
+<p>Enable reception of broadcast server messages to any local interface.</p>
+</div>
       
     </li>
   
@@ -688,9 +695,6 @@
         <pre class="lines">
 
 
-1
-2
-3
 4
 5
 6
@@ -760,10 +764,13 @@
 70
 71
 72
-73</pre>
+73
+74
+75
+76</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 1</span>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 4</span>
 
 class ntp (
   Boolean $broadcastclient,
@@ -845,7 +852,7 @@ class ntp (
 </div>
 
       <div id="footer">
-  Generated on Sun Oct  9 20:48:20 2016 by
+  Generated on Sun Oct  9 21:06:09 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.5 (ruby-2.3.1).
 </div>
