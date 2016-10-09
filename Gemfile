@@ -29,6 +29,7 @@ group :development, :unit_tests do
   gem 'rubocop' if RUBY_VERSION >= '2.0.0'
   gem 'rubocop-rspec', '~> 1.6' if RUBY_VERSION >= '2.3.0'
   gem 'json_pure', '<= 2.0.1' if RUBY_VERSION < '2.0.0'
+  gem 'puppet-strings', :git => 'https://github.com/puppetlabs/puppetlabs-strings.git'
 end
 group :system_tests do
   gem 'beaker', *location_from_env('BEAKER_VERSION', []) if RUBY_VERSION >= '2.3.0'

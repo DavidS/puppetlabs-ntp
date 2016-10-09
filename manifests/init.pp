@@ -1,3 +1,6 @@
+# This is the main class, which exposes all public functionality.
+#
+# @param broadcastclient Enable reception of broadcast server messages to any local interface.
 class ntp (
   Boolean $broadcastclient,
   Stdlib::Absolutepath $config,
